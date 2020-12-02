@@ -128,7 +128,7 @@ Particular `VirtualMachineInstance` by matching `Labels`. For example:
       name: example-preset
       selector:
         matchLabels:
-          kubevirt.io/os: win10
+          flavor: foo
       ...
 
 would match any `VirtualMachineInstance` in the same namespace with a
@@ -140,7 +140,7 @@ would match any `VirtualMachineInstance` in the same namespace with a
     metadata:
       name: myvmi
       labels:
-        kubevirt.io/os: win10
+        flavor: foo
       ...
 
 ### Conflicts
@@ -355,10 +355,9 @@ Use `kubectl get events` to show events.
         resources: {}
     status: {}
 
-Calling ‘kubectl get events\` would have a line like: 2m 2m 1
-myvmi.1515bbb8d397f258 VirtualMachineInstance Warning Conflict
-virtualmachineinstance-preset-controller Unable to apply
-VirtualMachineInstancePreset \`example-preset’: spec.cpu: &{6} != &{4}
+Calling ‘kubectl get events\` would have a line like:
+
+      2m            2m           1              myvmi.1515bbb8d397f258       VirtualMachineInstance Warning            virtualmachineinstance-preset-controller Unable to apply VirtualMachineInstancePreset \`example-preset’: spec.cpu: &{6} != &{4}
 
 ### Matching Multiple VirtualMachineInstances Using MatchLabels
 
